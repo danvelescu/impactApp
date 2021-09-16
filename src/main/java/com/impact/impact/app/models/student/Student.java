@@ -5,6 +5,7 @@ import com.impact.impact.app.models.User;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "students")
 public class Student {
 
     @Id
@@ -14,6 +15,12 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Column
+    private String name;
+
+    @Column
+    private String surname;
 
     public Student(long student_id, User user) {
         this.student_id = student_id;
