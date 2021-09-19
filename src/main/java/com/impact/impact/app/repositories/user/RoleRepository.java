@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role,Long> {
 
     @Query(value = "SELECT r FROM Role r where  r.role_id = ?1")
-    Role getRoleByRole_id(Long id);
+    Optional<Role> getRoleByRole_id(Long id);
 }

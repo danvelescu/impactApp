@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface RoleService {
-    Role getRoleById(Long role_id);
+    Role getRoleById(Long role_id) throws Exception;
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,16 +26,15 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleServiceImpl roleService;
 
     @Override
-    public User saveUser(UserDto userDto) {
+    public User saveUser(UserDto userDto) throws Exception {
         User newUser = new User();
         newUser.setUsername(userDto.getUsername());
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        Role role = roleRepository.getRoleByRole_id(1l);
-
+        Role role = roleService.getRoleById(1l);
         List<Role> roles = new ArrayList<>();
         roles.add(role);
         newUser.setUserRoles(roles);

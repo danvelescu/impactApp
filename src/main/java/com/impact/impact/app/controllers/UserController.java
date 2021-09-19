@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(path = "/registration",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity registerUser(@RequestBody UserDto userDto){
+    public ResponseEntity registerUser(@RequestBody UserDto userDto) throws Exception {
         userService.saveUser(userDto);
                return new ResponseEntity<>("success", HttpStatus.OK);
     }

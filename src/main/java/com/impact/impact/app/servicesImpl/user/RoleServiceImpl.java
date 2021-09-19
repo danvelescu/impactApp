@@ -6,6 +6,7 @@ import com.impact.impact.app.services.user.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 
 @Service
@@ -16,7 +17,11 @@ public class RoleServiceImpl implements RoleService {
     RoleRepository roleRepository;
 
     @Override
-    public Role getRoleById(Long role_id) {
-        return roleRepository.getRoleByRole_id(role_id);
+    public Role getRoleById(Long role_id) throws Exception {
+        Role role = roleRepository.getRoleByRole_id(role_id).orElseThrow(
+                () -> new Exception("Role not found with role id -  " + role_id)
+        );
+
+        return role;
     }
 }
