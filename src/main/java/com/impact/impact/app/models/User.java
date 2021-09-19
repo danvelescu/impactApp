@@ -1,14 +1,14 @@
 package com.impact.impact.app.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
+
 
 @Entity
 @Table(name="impact_users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long user_id;
     @Column
     private String username;
@@ -21,19 +21,34 @@ public class User {
     @Column
     private boolean enabled;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<UserRoles> userRole = new HashSet<UserRoles>(0);
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "role_id"))
+    private Collection<Role> userRoles;
 
-    public User(long user_id, String username, String password, String email, String phone_number) {
+   public User(){}
+
+    public User(long user_id, String username, String password, String email, String phone_number, boolean enabled) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone_number = phone_number;
+        this.enabled = enabled;
     }
 
-    public User() {
-
+    public User(long user_id, String username, String password, String email, String phone_number, boolean enabled, Collection<Role> userRoles) {
+        this.user_id = user_id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.enabled = enabled;
+        this.userRoles = userRoles;
     }
 
     public long getUser_id() {
@@ -84,11 +99,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Set<UserRoles> getUserRole() {
-        return userRole;
+    public Collection<Role> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRole(Set<UserRoles> userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(Collection<Role> userRoles) {
+        this.userRoles = userRoles;
     }
 }
