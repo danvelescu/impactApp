@@ -1,11 +1,19 @@
 package com.impact.impact.app.models.student;
 
 import com.impact.impact.app.models.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "students")
+@Getter
+@Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Student {
 
     @Id
@@ -21,29 +29,4 @@ public class Student {
 
     @Column
     private String surname;
-
-    public Student(long student_id, User user) {
-        this.student_id = student_id;
-        this.user = user;
-    }
-
-    public Student() {
-
-    }
-
-    public long getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(long student_id) {
-        this.student_id = student_id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

@@ -17,8 +17,11 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     protected void configure(HttpSecurity http)throws Exception{
                     http.cors().and()
                             .authorizeRequests()
-                            .antMatchers("/user/registration")
+                            .antMatchers("/user/registration/","/auth/login")
                             .permitAll()
+                            .and()
+                            .authorizeRequests().antMatchers("/admin/**")
+                            .hasRole("ADMIN")
                             .and()
                             .csrf().disable();
     }

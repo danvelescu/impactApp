@@ -1,17 +1,15 @@
 package com.impact.impact.app.models.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class RoleDto {
     private String role_type;
-
-    public RoleDto(String role_type) {
-        this.role_type = role_type;
-    }
-
-    public String getRole_type() {
-        return role_type;
-    }
-
-    public void setRole_type(String role_type) {
-        this.role_type = role_type;
-    }
 }

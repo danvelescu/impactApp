@@ -1,11 +1,20 @@
 package com.impact.impact.app.models;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "roles")
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,41 +25,4 @@ public class Role {
 
     @ManyToMany(mappedBy = "userRoles")
     private Collection<User> users;
-
-    public Role(){}
-
-    public Role(long role_id, String role_type) {
-        this.role_id = role_id;
-        this.role_type = role_type;
-    }
-
-    public Role(Long role_id, String role_type, Collection<User> users) {
-        this.role_id = role_id;
-        this.role_type = role_type;
-        this.users = users;
-    }
-
-    public long getRole_id() {
-        return role_id;
-    }
-
-    public void setRole_id(long role_id) {
-        this.role_id = role_id;
-    }
-
-    public String getRole_type() {
-        return role_type;
-    }
-
-    public void setRole_type(String role_type) {
-        this.role_type = role_type;
-    }
-
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
-    }
 }
